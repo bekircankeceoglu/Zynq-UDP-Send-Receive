@@ -8,6 +8,7 @@
 #include "UDPDev.h"
 
 uint32_t rcvPort;
+u8 * udpRcvBuf;
 
 UDPDev::UDPDev() {
 	// TODO Auto-generated constructor stub
@@ -33,8 +34,9 @@ void UDPDev::udp_receive(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct
 					ip_addr *addr, u16_t port)
 {
     if (p != NULL) {
-
-		rcvPort = port;
+	
+	udpRcvBuf = (u8 *)(p->payload);
+	rcvPort = port;
 
     }
     pbuf_free(p);
